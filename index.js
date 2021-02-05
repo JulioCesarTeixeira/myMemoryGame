@@ -78,7 +78,7 @@ gameCards();
 
 //matching cards.
 function matching() {
-    let imgCards = document.querySelectorAll('img');
+    let imgCards = document.querySelectorAll('.pokeCards');
     const elementOne = chosenCardsID[0];
     const elementTwo = chosenCardsID[1];
     if (chosenCards[0] === chosenCards[1]) {
@@ -114,11 +114,12 @@ function cardFlip() {
         setTimeout(matching, 250);          //the timeout prevents the matching function to act too quickly
     }                                               //without it, we get the prompt if matches or not before the card is flipped
 }
-//restart button, reset score turn back cards
+//restart button, reset score turn back cards and shuffle them again
 document.getElementById('restart').addEventListener('click', ()=>{
-    document.querySelectorAll('img').forEach((img)=>{
-        img.setAttribute('src', 'images/cover.jpg');
+    document.querySelectorAll('.pokeCards').forEach((pokeCard)=>{
+        pokeCard.setAttribute('src', 'images/cover.jpg');
     })
     winningCards.splice(0, winningCards.length);
     results.textContent = "You have captured " + "0" + " Pokemon pair";
+    cardImages.sort(() => 0.5 - Math.random());
 })
