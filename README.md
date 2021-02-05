@@ -1,1 +1,2 @@
-# myMemoryGame
+# Pokemon - Memory card game
+

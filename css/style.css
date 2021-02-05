@@ -1,0 +1,22 @@
+body {
+    font-family: Pokemon, sans-serif;
+}
+
+#wrapper{
+    border: 2px solid green;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5%;
+    width: 70vw;
+    height: 80vh;
+    align-content: center;
+    margin: 0 auto;
+    padding-top: 10vh;
+    padding-left: 10vw;
+}
+.pokeCards{
+    display: grid;
+    border: 2px solid green;
+    height: 150px;
+    width: 100px;
+}
