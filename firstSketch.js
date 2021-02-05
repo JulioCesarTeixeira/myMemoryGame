@@ -41,7 +41,9 @@
 
  ]
 
- var items = [];
+
+
+var items = [];
 
  var dados = {};
  dados.compareA = 0; //ID do cardImages
@@ -49,11 +51,11 @@
  dados.idA = 0; //ID do HTML
  dados.idB = 0; //ID do HTML
 
- const imagemCover = 'images/cover.jpg'; //Imagem base do card fechado
+ const imagemCover = 'images/cover.jpg'; //base deck cover image
+ cardImages.sort(()=> 0.5 - Math.random());
+ distributeCards();
 
- shuffleImgs();
-
- function shuffleImgs() {
+ function distributeCards() {
      var u = 0;
      for (let i = 0; i < cardImages.length; i++) {
          var t = {};
@@ -65,16 +67,15 @@
      }
      for (let i = 0; i < cardImages.length; i++) {
          var t = {};
-         t.o = cardImages[i]; //Objeto de referencia do Card Images
-         t.p = u //Id de referencia no HTML
+         t.o = cardImages[i]; //reference object in cardImages
+         t.p = u //HTML ID reference
 
          items.push(t);
          u++;
      }
      //console.log(items);
 
-
-     //Crio o html
+     //Create html
      for (let i = 0; i < items.length; i++) {
          cardImgs(items[i].p);
      }
@@ -96,7 +97,7 @@
 
  function atualizar(v) {
 
-     //Busca a  partir do id do html, o objeto(card) de referencia
+     //search for the object card from the HTML id
      var g = items.find(c => c.p === v);
      //console.log(g);
 
@@ -106,16 +107,16 @@
 
      //x.src = getElementByCard(g.o.id).img;
 
-     //Se ja tem imagem do pokemon, coloca a imagem cover
+     //if image has a pokemon image, put the cover instead
      if (hasClass(x, 'select')) {
          x.src = imagemCover;
          x.classList.remove("select");
          //LimpaId()
      } else {
-         //coloca a imagem do pokemon
+         //put the pokemon image
          x.src = getElementByCard(g.o.id).img;
          x.className += ' select';
-         Comparar(g.o.id, v);
+         toCompare(g.o.id, v);
      }
  }
 
@@ -137,7 +138,7 @@
      dados.idB = 0;
  }
 
- function Comparar(v, a) {
+ function toCompare(v, a) {
      //console.log(v);
 
      //valida se tem o primeiro item preenchido
@@ -149,37 +150,37 @@
          dados.compareB = v;
          dados.idB = a;
      }
-     //console.log(PodeComparar());
+     //console.log(canCompare());
      //console.log(dados);
 
-     if (PodeComparar()) {
-         var b = ComparacaoMatch(dados);
+     if (canCompare()) {
+         var b = matchComparation(dados);
          if (b) {
-             alert('BOA');
+             alert('Good catch!');
              LimpaId();
          } else {
-             alert('Deu ruim');
+             alert('Too bad, give it another go!');
              LimparComparacao();
          }
      }
  }
 
- function PodeComparar() {
+ function canCompare() {
      return (dados.compareA > 0 && dados.compareB > 0);
  }
 
- function ComparacaoMatch(a) {
+ function matchComparation(a) {
      //console.log(dados);
      //if (dados.compareA === "" || dados.compareB === "") return false;
 
-     // console.log(a.compareA);
+     // console.log(a.compareA  );
      //console.log(a.compareB);
 
-     var el1 = getElementByCard(a.compareA);
-     var el2 = getElementByCard(a.compareB);
+     var cardOne = getElementByCard(a.compareA);
+     var cardTwo = getElementByCard(a.compareB);
 
-     //console.log(el1 !== "undefined");
-     //console.log(el2 !== "undefined");
+     //console.log(cardOne !== "undefined");
+     //console.log(cardTwo !== "undefined");
 
-     return (el1.id === el2.id);
+     return (cardOne.id === cardTwo.id);
  }
