@@ -115,7 +115,7 @@ function cardFlip() {
     chosenCardsID.push(dataId);                 //pushes the data-id from imgCard (this), to chosenCardsID empty array
     this.setAttribute('src', cardImages[dataId].img);           //set new src corresponding img src to 'flip' the card
     if (chosenCards.length === 2) {
-        setTimeout(matching, 1000);          //the timeout prevents the matching function to act too quickly
+        setTimeout(matching, 500);          //the timeout prevents the matching function to act too quickly
     }                                               //without it, we get the prompt if matches or not before the card is flipped
 }
 //restart button, reset score turn back cards and shuffle them again
