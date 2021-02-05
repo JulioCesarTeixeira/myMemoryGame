@@ -82,12 +82,10 @@ function matching() {
     const elementOne = chosenCardsID[0];
     const elementTwo = chosenCardsID[1];
     if (chosenCards[0] === chosenCards[1]) {
-        alert('Good catch!');
         imgCards[elementOne].setAttribute('src', 'images/pokeball.png');
         imgCards[elementTwo].setAttribute('src', 'images/pokeball.png');
         winningCards.push(chosenCards);
     } else {
-        alert("Too bad, give it another go!");
         imgCards[elementOne].setAttribute('src', 'images/cover.jpg');
         imgCards[elementTwo].setAttribute('src', 'images/cover.jpg');
     }
@@ -106,12 +104,18 @@ function matching() {
 
 //flip cards, push
 function cardFlip() {
-    let dataId = this.getAttribute('data-id');          //'This' refers to imgCards. imgCards invokes the function cardFlip()
+    if(chosenCards.length === 2){
+        return;
+    }
+    let dataId = this.getAttribute('data-id');//'This' refers to imgCards. imgCards invokes the function cardFlip()
+    if (dataId === chosenCardsID[0]){
+        return;
+    }
     chosenCards.push(cardImages[dataId].name);          //pushes the name of the selected 'data-ids' inside from cardImages arr to a new empty array
     chosenCardsID.push(dataId);                 //pushes the data-id from imgCard (this), to chosenCardsID empty array
     this.setAttribute('src', cardImages[dataId].img);           //set new src corresponding img src to 'flip' the card
     if (chosenCards.length === 2) {
-        setTimeout(matching, 250);          //the timeout prevents the matching function to act too quickly
+        setTimeout(matching, 1000);          //the timeout prevents the matching function to act too quickly
     }                                               //without it, we get the prompt if matches or not before the card is flipped
 }
 //restart button, reset score turn back cards and shuffle them again
